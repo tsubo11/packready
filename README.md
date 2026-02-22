@@ -157,7 +157,7 @@ URL：https://apps.apple.com/jp/app/%E5%87%BA%E3%81%8B%E3%81%91%E3%82%8B%E5%89%8
 
 そのため本アプリでは、通知による「想起」ではなく、
 
-**タイミングごとの整理による「行動設計」**に焦点を当てています。
+**タイミングごとの整理による「行動設計」** に焦点を当てています。
 
 ### 5-3. 差別化ポイント
 
@@ -321,3 +321,7 @@ UI・体験の改善：
 ## 画面遷移図
 
 - [画面遷移図](https://www.figma.com/design/PSRomsFCeRtTkTVDxCUPKD/%E5%8D%92%E5%88%B6%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&p=f&t=T9VtT5KPw7EExtCL-0)
+
+## ER図
+
+- ![ER図](卒業制作ER図.png)
