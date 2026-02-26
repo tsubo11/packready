@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+/* カラー変数 */
+@theme {
+  --color-brown: #3d2b1f;
+  --color-brown-mid:  #6b4c3b;
+  --color-gold:       #c9a84c;
+  --color-cream:      #fefcf7;
+  --color-text-main:  #2c1a0e;
+  --color-text-muted: #8a6a50;
+
+  --font-nunito: 'Nunito', sans-serif;
+  --font-dm:     'DM Sans', sans-serif;
+}
+
