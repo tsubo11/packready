@@ -324,4 +324,4 @@ UI・体験の改善：
 
 ## ER図
 
-- ![ER図](卒業制作ER図.png)
+- ![alt text](../ER.png)

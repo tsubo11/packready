@@ -1,0 +1,40 @@
+<div class="min-h-screen flex flex-col items-center justify-center px-5 py-16 bg-cream">
+
+  <%# ロゴアイコン %>
+  <div class="flex items-center justify-center w-22 h-22 rounded-3xl bg-brown mb-6">
+    <svg width="50" height="50" viewBox="0 0 48 48" fill="none">
+      <path d="M17 16C17 12 20 10 24 10C28 10 31 12 31 16"
+            stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="8" y="16" width="32" height="22" rx="4"
+            fill="rgba(201,168,76,0.1)" stroke="#c9a84c" stroke-width="2.5"/>
+      <polyline points="16,28 21,34 32,22"
+                stroke="#e8c96a" stroke-width="3"
+                stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <%# ロゴテキスト %>
+  <p class="font-nunito text-4xl font-black tracking-tight text-text-main mb-3">
+    Pack<span class="text-gold">Ready</span>
+  </p>
+
+  <%# タグライン %>
+  <p class="font-dm text-sm text-text-muted mb-14">
+    宿泊準備を、タイミングで整理するアプリ
+  </p>
+
+  <%# ボタングループ %>
+  <div class="flex flex-col gap-4 w-full max-w-xs mb-10">
+    <%= link_to "新規登録", "#",
+          class: "block w-full py-4 rounded-2xl bg-brown text-white font-nunito text-lg font-extrabold text-center hover:bg-brown-mid transition-colors" %>
+    <%= link_to "ログイン", "#",
+          class: "block w-full py-4 rounded-2xl border-2 border-gold text-gold font-nunito text-lg font-extrabold text-center hover:bg-gold/10 transition-colors" %>
+  </div>
+
+  <%# フッターリンク %>
+  <div class="flex gap-6">
+    <%= link_to "プライバシーポリシー", "#", class: "font-dm text-xs text-text-muted opacity-45" %>
+    <%= link_to "利用規約",             "#", class: "font-dm text-xs text-text-muted opacity-45" %>
+  </div>
+
+</div>
