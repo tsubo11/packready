@@ -68,3 +68,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# 認証
+gem "devise"
