@@ -1,0 +1,45 @@
+<div class="min-h-screen flex flex-col items-center justify-center px-5 py-16 bg-cream">
+
+  <%# タイトル %>
+  <p class="font-nunito text-4xl font-black tracking-tight text-text-main mb-3">
+    ログイン
+  </p>
+
+  <%# サブタイトル %>
+  <p class="font-dm text-sm text-text-muted mb-10">
+    ログインしてパッキングを始めよう
+  </p>
+
+  <%# フォームカード %>
+  <div class="w-full max-w-xs">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="flex flex-col gap-4 mb-6">
+        <div>
+          <%= f.label :email, "メールアドレス", class: "block font-dm text-sm text-text-main mb-1" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",
+              class: "w-full px-4 py-3 rounded-2xl border-2 border-gold/30 bg-cream text-text-main font-dm text-sm focus:outline-none focus:border-gold transition-colors" %>
+        </div>
+
+        <div>
+          <%= f.label :password, "パスワード", class: "block font-dm text-sm text-text-main mb-1" %>
+          <%= f.password_field :password, autocomplete: "current-password",
+              class: "w-full px-4 py-3 rounded-2xl border-2 border-gold/30 bg-cream text-text-main font-dm text-sm focus:outline-none focus:border-gold transition-colors" %>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <%= f.check_box :remember_me, class: "rounded border-gold/30" %>
+          <%= f.label :remember_me, "ログイン状態を保持する", class: "font-dm text-sm text-text-muted" %>
+        </div>
+      </div>
+
+      <%= f.submit "ログイン",
+          class: "block w-full py-4 rounded-2xl border-2 border-gold text-gold font-nunito text-lg font-extrabold text-center cursor-pointer hover:bg-gold/10 transition-colors" %>
+    <% end %>
+
+    <div class="mt-6 text-center">
+      <%= link_to "アカウントをお持ちでない方はこちら", new_registration_path(resource_name),
+          class: "font-dm text-xs text-text-muted opacity-45" %>
+    </div>
+  </div>
+
+</div>

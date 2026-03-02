@@ -25,9 +25,9 @@
 
   <%# ボタングループ %>
   <div class="flex flex-col gap-4 w-full max-w-xs mb-10">
-    <%= link_to "新規登録", "#",
+    <%= link_to "新規登録", new_user_registration_path,
           class: "block w-full py-4 rounded-2xl bg-brown text-white font-nunito text-lg font-extrabold text-center hover:bg-brown-mid transition-colors" %>
-    <%= link_to "ログイン", "#",
+    <%= link_to "ログイン", new_user_session_path,
           class: "block w-full py-4 rounded-2xl border-2 border-gold text-gold font-nunito text-lg font-extrabold text-center hover:bg-gold/10 transition-colors" %>
   </div>
 
