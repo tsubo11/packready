@@ -1,0 +1,47 @@
+<div class="min-h-screen bg-cream px-6 py-8 flex flex-col items-center justify-center">
+  <div class="w-full max-w-sm">
+
+  <%# ヘッダー %>
+    <div class="relative flex items-center justify-center mb-4 w-full">
+    <%= link_to root_path, class: "absolute left-0 text-brown text-xl font-bold" do %>
+        ←
+    <% end %>
+    <h1 class="text-4xl font-bold text-brown tracking-wide">リスト作成</h1>
+    </div>
+
+    <%# サブタイトル %>
+    <p class="text-text-muted text-sm mb-8 text-center">荷造りを始めましょう</p>
+
+  <%# エラー表示 %>
+  <% if @packing_list.errors.any? %>
+    <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+      <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
+        <% @packing_list.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%# フォーム %>
+  <%= form_with model: @packing_list, data: { turbo: false }, class: "space-y-6" do |f| %>
+
+    <div>
+      <%= f.label :name, "リスト名", class: "block text-sm font-semibold text-brown mb-2" %>
+      <%= f.text_field :name,
+          placeholder: "大阪旅行",
+          class: "w-full px-4 py-3 border border-brown-mid rounded-xl bg-white text-text-main placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-gold" %>
+    </div>
+
+    <div>
+  <%= f.label :departure_date, "出発日", class: "block text-sm font-semibold text-brown mb-2" %>
+  <%= f.date_field :departure_date,
+      class: "w-full px-4 py-3 border border-brown-mid rounded-xl bg-white text-text-main focus:outline-none focus:ring-2 focus:ring-gold" %>
+</div>
+
+    <%= f.submit "保存",
+        class: "w-full py-3 mt-4 bg-gold text-white font-bold rounded-xl hover:opacity-90 cursor-pointer text-base" %>
+  <% end %>
+
+  </div>
+</div>
