@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  departure_date: 2026-03-04
+  user: one
+
+two:
+  name: MyString
+  departure_date: 2026-03-04
+  user: two
