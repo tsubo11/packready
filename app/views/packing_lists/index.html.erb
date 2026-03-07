@@ -1,0 +1,43 @@
+<div class="min-h-screen bg-cream">
+  <div class="max-w-lg mx-auto px-6 py-8">
+
+    <%# ヘッダー %>
+    <div class="relative flex items-center justify-center mb-8">
+      <h1 class="text-3xl font-bold text-brown font-nunito">リスト一覧</h1>
+    </div>
+
+    <%# リスト一覧 %>
+    <% if @packing_lists.empty? %>
+      <p class="text-center text-gray-400 mt-20">リストがありません</p>
+    <% else %>
+      <div class="space-y-3">
+        <% @packing_lists.each do |list| %>
+          <%= link_to packing_list_path(list), class: "block" do %>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 relative">
+
+              <%# ︙ボタン %>
+              <button class="absolute top-3 right-3 text-gray-400 text-xl leading-none">⋮</button>
+
+              <h2 class="text-lg font-bold text-brown font-nunito pr-6"><%= list.name %></h2>
+
+              <% if list.departure_date.present? %>
+                <p class="text-sm text-gray-500 mt-1">
+                  出発日：<%= list.departure_date.strftime("%Y/%m/%d") %>
+                </p>
+              <% end %>
+
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+
+  <%# 新規作成ボタン（FAB）- 右下固定 %>
+  <%= link_to new_packing_list_path,
+      class: "fixed bottom-6 right-6 w-14 h-14 bg-gold rounded-full shadow-lg flex items-center justify-center text-white text-3xl font-light" do %>
+    +
+  <% end %>
+
+</div>

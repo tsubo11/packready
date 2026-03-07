@@ -1,4 +1,8 @@
 class PackingListsController < ApplicationController
+  def index
+    @packing_lists = current_user.packing_lists.order(departure_date: :asc)
+  end
+
   def new
     @packing_list = current_user.packing_lists.build
   end
@@ -10,6 +14,10 @@ class PackingListsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @packing_list = current_user.packing_lists.find(params[:id])
   end
 
   private
