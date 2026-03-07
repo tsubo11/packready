@@ -1,0 +1,37 @@
+<div class="max-w-lg mx-auto px-6 py-8">
+
+  <%# ヘッダー：戻る／リスト名（中央）／編集ボタン %>
+  <div class="relative flex items-center justify-center mb-6">
+    <%= link_to packing_lists_path, class: "absolute left-0 text-brown" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    <% end %>
+
+    <h1 class="text-2xl font-bold text-brown"><%= @packing_list.name %></h1>
+
+    <button class="absolute right-0 text-sm text-gold font-semibold" disabled>編集</button>
+  </div>
+
+  <%# 出発日 %>
+  <div class="text-center text-sm text-brown/60 mb-8">
+    <% if @packing_list.departure_date %>
+      出発日：<%= @packing_list.departure_date.strftime("%Y年%m月%d日") %>
+    <% else %>
+      出発日未設定
+    <% end %>
+  </div>
+
+  <%# 当日セクション（上部） %>
+  <section class="mb-8">
+    <h2 class="text-base font-bold text-gold border-b border-gold/30 pb-1 mb-4">当日の朝</h2>
+    <p class="text-sm text-brown/40">アイテムはまだありません</p>
+  </section>
+
+  <%# 前日セクション（下部） %>
+  <section class="mb-8">
+    <h2 class="text-base font-bold text-gold border-b border-gold/30 pb-1 mb-4">前日まで</h2>
+    <p class="text-sm text-brown/40">アイテムはまだありません</p>
+  </section>
+
+</div>
