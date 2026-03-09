@@ -1,0 +1,29 @@
+class ItemsController < ApplicationController
+  before_action :set_packing_list
+
+  def new
+    @item = @packing_list.items.build
+    @item.timing = params[:timing] if params[:timing].present?
+  end
+
+  def create
+    @item = @packing_list.items.build(item_params)
+    if @item.save
+      redirect_to edit_packing_list_path(@packing_list), notice: "アイテムを追加しました"
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def set_packing_list
+    @packing_list = current_user.packing_lists.find(params[:packing_list_id])
+  rescue ActiveRecord::RecordNotFound
+    render file: "#{Rails.root}/public/404.html", status: :not_found, layout: false
+  end
+
+  def item_params
+    params.require(:item).permit(:name, :timing)
+  end
+end

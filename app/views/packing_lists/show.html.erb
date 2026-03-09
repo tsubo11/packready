@@ -11,6 +11,8 @@
     <h1 class="text-2xl font-bold text-brown"><%= @packing_list.name %></h1>
 
     <button class="absolute right-0 text-sm text-gold font-semibold" disabled>編集</button>
+    <%= link_to "編集", edit_packing_list_path(@packing_list),
+    class: "absolute right-0 text-sm text-gold font-semibold" %>
   </div>
 
   <%# 出発日 %>
@@ -24,7 +26,7 @@
 
   <%# 当日セクション（上部） %>
   <section class="mb-8">
-    <h2 class="text-base font-bold text-gold border-b border-gold/30 pb-1 mb-4">当日の朝</h2>
+    <h2 class="text-base font-bold text-gold border-b border-gold/30 pb-1 mb-4">当日</h2>
     <p class="text-sm text-brown/40">アイテムはまだありません</p>
   </section>
 
