@@ -21,6 +21,10 @@ class PackingListsController < ApplicationController
   def show
   end
 
+  def edit
+    @packing_list = current_user.packing_lists.find(params[:id])
+  end
+
   private
 
   def set_packing_list
