@@ -12,7 +12,7 @@ class PackingListsController < ApplicationController
   def create
     @packing_list = current_user.packing_lists.build(packing_list_params)
     if @packing_list.save
-      redirect_to root_path, notice: "リストを作成しました"
+      redirect_to packing_list_path(@packing_list), notice: "リストを作成しました"
     else
       render :new, status: :unprocessable_entity
     end
