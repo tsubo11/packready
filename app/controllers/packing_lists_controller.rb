@@ -1,5 +1,5 @@
 class PackingListsController < ApplicationController
-  before_action :set_packing_list, only: [:show]
+  before_action :set_packing_list, only: [:show, :edit]
   
   def index
     @packing_lists = current_user.packing_lists.order(departure_date: :asc)
@@ -19,10 +19,13 @@ class PackingListsController < ApplicationController
   end
 
   def show
+    @morning_items = @packing_list.items.where(timing: :morning)
+    @day_before_items = @packing_list.items.where(timing: :day_before)
   end
 
   def edit
-    @packing_list = current_user.packing_lists.find(params[:id])
+      @morning_items = @packing_list.items.where(timing: :morning)
+      @day_before_items = @packing_list.items.where(timing: :day_before)
   end
 
   private

@@ -324,4 +324,4 @@ UI・体験の改善：
 
 ## ER図
 
-- (<img width="1336" height="376" alt="Image" src="https://github.com/user-attachments/assets/45fac644-9e30-4aa7-a267-3f6b72b517db" />)
+<img width="1336" height="376" alt="Image" src="https://github.com/user-attachments/assets/45fac644-9e30-4aa7-a267-3f6b72b517db" />
