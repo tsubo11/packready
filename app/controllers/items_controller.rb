@@ -1,6 +1,11 @@
 class ItemsController < ApplicationController
   before_action :set_packing_list
 
+  def index
+    @morning_items = @packing_list.items.where(timing: :morning)
+    @day_before_items = @packing_list.items.where(timing: :day_before)
+  end
+
   def new
     @item = @packing_list.items.build
     @item.timing = params[:timing] if params[:timing].present?
@@ -9,7 +14,7 @@ class ItemsController < ApplicationController
   def create
     @item = @packing_list.items.build(item_params)
     if @item.save
-      redirect_to edit_packing_list_path(@packing_list), notice: "アイテムを追加しました"
+      redirect_to packing_list_items_path(@packing_list), notice: "アイテムを追加しました"
     else
       render :new, status: :unprocessable_entity
     end
