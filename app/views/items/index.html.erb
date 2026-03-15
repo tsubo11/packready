@@ -14,8 +14,10 @@
     <% if @morning_items.any? %>
       <ul class="space-y-2 mb-3">
         <% @morning_items.each do |item| %>
-          <li class="flex items-center gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
+          <li class="flex items-center justify-between gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
             <span class="text-sm text-brown"><%= item.name %></span>
+            <%= link_to "編集", edit_packing_list_item_path(@packing_list, item),
+                class: "text-xs text-brown/40 hover:text-gold shrink-0" %>
           </li>
         <% end %>
       </ul>
@@ -31,8 +33,10 @@
     <% if @day_before_items.any? %>
       <ul class="space-y-2 mb-3">
         <% @day_before_items.each do |item| %>
-          <li class="flex items-center gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
+          <li class="flex items-center justify-between gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
             <span class="text-sm text-brown"><%= item.name %></span>
+            <%= link_to "編集", edit_packing_list_item_path(@packing_list, item),
+                class: "text-xs text-brown/40 hover:text-gold shrink-0" %>
           </li>
         <% end %>
       </ul>

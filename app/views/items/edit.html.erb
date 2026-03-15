@@ -1,0 +1,34 @@
+<div class="min-h-screen bg-cream py-10 px-4">
+  <div class="max-w-lg mx-auto">
+
+    <h1 class="text-2xl font-bold text-brown mb-6">持ち物を編集</h1>
+
+    <%= form_with model: [@packing_list, @item], data: { turbo: false } do |f| %>
+
+      <% if @item.errors.any? %>
+        <div class="mb-4 p-4 bg-red-50 border border-red-300 rounded-lg">
+          <ul class="list-disc list-inside text-red-600 text-sm">
+            <% @item.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="mb-4">
+        <%= f.label :name, "持ち物名", class: "block text-sm font-medium text-brown mb-1" %>
+        <%= f.text_field :name,
+            class: "w-full border border-brown/30 rounded-lg px-4 py-2 text-brown focus:outline-none focus:ring-2 focus:ring-gold" %>
+      </div>
+
+      <div class="flex gap-3">
+        <%= f.submit "保存する",
+            class: "bg-gold text-white font-semibold px-6 py-2 rounded-lg hover:opacity-80 cursor-pointer" %>
+        <%= link_to "キャンセル", packing_list_items_path(@packing_list),
+            class: "px-6 py-2 rounded-lg border border-brown/30 text-brown hover:bg-brown/5" %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
