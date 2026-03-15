@@ -1,4 +1,4 @@
-<div class="max-w-lg mx-auto px-6 py-8">
+<div class="max-w-lg mx-auto px-6 py-8" data-controller="modal">
   <div class="relative flex items-center justify-center mb-6">
     <%= link_to "←", packing_list_path(@packing_list), class: "absolute left-0 text-brown text-xl" %>
     <h1 class="text-2xl font-bold text-brown">持ち物を編集</h1>
@@ -31,8 +31,12 @@
     <% else %>
       <p class="text-sm text-brown/40 mb-3">アイテムはまだありません</p>
     <% end %>
-    <%= link_to "+ 持ち物を追加", new_packing_list_item_path(@packing_list, timing: :morning),
-        class: "block w-full border border-dashed border-brown/30 rounded-lg py-3 text-center text-sm text-brown/60 hover:border-gold hover:text-gold transition" %>
+    <button
+      data-action="click->modal#open"
+      data-timing="morning"
+      class="block w-full border border-dashed border-brown/30 rounded-lg py-3 text-center text-sm text-brown/60 hover:border-gold hover:text-gold transition">
+      + 持ち物を追加
+    </button>
   </section>
 
   <section class="mb-8">
@@ -57,7 +61,29 @@
     <% else %>
       <p class="text-sm text-brown/40 mb-3">アイテムはまだありません</p>
     <% end %>
-    <%= link_to "+ 持ち物を追加", new_packing_list_item_path(@packing_list, timing: :day_before),
-        class: "block w-full border border-dashed border-brown/30 rounded-lg py-3 text-center text-sm text-brown/60 hover:border-gold hover:text-gold transition" %>
+    <button
+      data-action="click->modal#open"
+      data-timing="day_before"
+      class="block w-full border border-dashed border-brown/30 rounded-lg py-3 text-center text-sm text-brown/60 hover:border-gold hover:text-gold transition">
+      + 持ち物を追加
+    </button>
   </section>
+
+  <%# モーダル %>
+  <div
+    data-modal-target="overlay"
+    data-action="click->modal#clickOutside"
+    class="hidden fixed inset-0 bg-black/40 flex items-end justify-center z-50">
+    <div
+      data-modal-target="panel"
+      class="bg-cream w-full max-w-lg rounded-t-2xl p-6">
+      <h2 class="text-lg font-bold text-brown mb-4">持ち物を追加</h2>
+      <%# フォームは次ISSUEで実装 %>
+      <button
+        data-action="click->modal#close"
+        class="mt-4 w-full py-2 text-sm text-brown/60 hover:text-brown">
+        キャンセル
+      </button>
+    </div>
+  </div>
 </div>
