@@ -1,47 +1,31 @@
 <div class="max-w-lg mx-auto px-6 py-8">
   <div class="relative flex items-center justify-center mb-6">
-    <%= link_to "←", packing_list_path(@packing_list), class: "absolute left-0 text-brown text-xl" %>
-    <h1 class="text-2xl font-bold text-brown">持ち物を編集</h1>
+    <%= link_to "←", packing_lists_path, class: "absolute left-0 text-brown text-xl" %>
+    <h1 class="text-2xl font-bold text-brown">リスト編集</h1>
   </div>
 
-  <p class="text-sm text-brown/60 mb-1">旅行名：<%= @packing_list.name %></p>
-  <% if @packing_list.departure_date %>
-    <p class="text-sm text-brown/60 mb-6">出発日：<%= @packing_list.departure_date.strftime("%Y年%m月%d日") %></p>
+  <%= form_with model: @packing_list, data: { turbo: false } do |f| %>
+    <% if @packing_list.errors.any? %>
+      <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded text-sm text-red-600">
+        <% @packing_list.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= f.label :name, "旅行名", class: "block text-sm font-semibold text-brown mb-1" %>
+      <%= f.text_field :name,
+          class: "w-full border border-brown/30 rounded-lg px-4 py-2 text-brown bg-cream focus:outline-none focus:ring-2 focus:ring-gold/50" %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.label :departure_date, "出発日", class: "block text-sm font-semibold text-brown mb-1" %>
+      <%= f.date_field :departure_date,
+          class: "w-full border border-brown/30 rounded-lg px-4 py-2 text-brown bg-cream focus:outline-none focus:ring-2 focus:ring-gold/50" %>
+    </div>
+
+    <%= f.submit "更新",
+        class: "w-full bg-brown text-cream font-bold py-3 rounded-xl hover:opacity-80 transition" %>
   <% end %>
-
-  <%# 当日セクション %>
-  <section class="mb-8">
-    <h2 class="text-base font-bold text-gold border-b border-gold/30 pb-1 mb-4">当日</h2>
-    <% if @morning_items.any? %>
-      <ul class="space-y-2 mb-3">
-        <% @morning_items.each do |item| %>
-          <li class="flex items-center gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
-            <span class="text-sm text-brown"><%= item.name %></span>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p class="text-sm text-brown/40 mb-3">アイテムはまだありません</p>
-    <% end %>
-    <%= link_to "+ 持ち物を追加", new_packing_list_item_path(@packing_list, timing: :morning),
-        class: "block w-full border border-dashed border-brown/30 rounded-lg py-3 text-center text-sm text-brown/60 hover:border-gold hover:text-gold transition" %>
-  </section>
-
-  <%# 前日セクション %>
-  <section class="mb-8">
-    <h2 class="text-base font-bold text-gold border-b border-gold/30 pb-1 mb-4">前日まで</h2>
-    <% if @day_before_items.any? %>
-      <ul class="space-y-2 mb-3">
-        <% @day_before_items.each do |item| %>
-          <li class="flex items-center gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
-            <span class="text-sm text-brown"><%= item.name %></span>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p class="text-sm text-brown/40 mb-3">アイテムはまだありません</p>
-    <% end %>
-    <%= link_to "+ 持ち物を追加", new_packing_list_item_path(@packing_list, timing: :day_before),
-        class: "block w-full border border-dashed border-brown/30 rounded-lg py-3 text-center text-sm text-brown/60 hover:border-gold hover:text-gold transition" %>
-  </section>
 </div>

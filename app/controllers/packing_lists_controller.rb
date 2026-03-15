@@ -1,5 +1,5 @@
 class PackingListsController < ApplicationController
-  before_action :set_packing_list, only: [:show, :edit]
+  before_action :set_packing_list, only: [:show, :edit, :update]
   
   def index
     @packing_lists = current_user.packing_lists.order(departure_date: :asc)
@@ -24,8 +24,14 @@ class PackingListsController < ApplicationController
   end
 
   def edit
-      @morning_items = @packing_list.items.where(timing: :morning)
-      @day_before_items = @packing_list.items.where(timing: :day_before)
+  end
+
+  def update
+    if @packing_list.update(packing_list_params)
+      redirect_to packing_list_path(@packing_list), notice: "リストを更新しました"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
