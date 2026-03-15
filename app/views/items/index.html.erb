@@ -16,8 +16,15 @@
         <% @morning_items.each do |item| %>
           <li class="flex items-center justify-between gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
             <span class="text-sm text-brown"><%= item.name %></span>
-            <%= link_to "編集", edit_packing_list_item_path(@packing_list, item),
-                class: "text-xs text-brown/40 hover:text-gold shrink-0" %>
+            <div class="flex items-center gap-3 shrink-0">
+              <%= link_to "編集", edit_packing_list_item_path(@packing_list, item),
+                  class: "text-xs text-brown/40 hover:text-gold" %>
+              <%= button_to "削除", packing_list_item_path(@packing_list, item),
+                  method: :delete,
+                  form: { data: { turbo_confirm: "「#{item.name}」を削除しますか？" } },
+                  form_class: "inline-flex items-center",
+                  class: "text-xs text-brown/40 hover:text-red-400" %>
+            </div>
           </li>
         <% end %>
       </ul>
@@ -35,8 +42,15 @@
         <% @day_before_items.each do |item| %>
           <li class="flex items-center justify-between gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
             <span class="text-sm text-brown"><%= item.name %></span>
-            <%= link_to "編集", edit_packing_list_item_path(@packing_list, item),
-                class: "text-xs text-brown/40 hover:text-gold shrink-0" %>
+            <div class="flex items-center gap-3 shrink-0">
+              <%= link_to "編集", edit_packing_list_item_path(@packing_list, item),
+                  class: "text-xs text-brown/40 hover:text-gold" %>
+              <%= button_to "削除", packing_list_item_path(@packing_list, item),
+                  method: :delete,
+                  form: { data: { turbo_confirm: "「#{item.name}」を削除しますか？" } },
+                  form_class: "inline-flex items-center",
+                  class: "text-xs text-brown/40 hover:text-red-400" %>
+            </div>
           </li>
         <% end %>
       </ul>

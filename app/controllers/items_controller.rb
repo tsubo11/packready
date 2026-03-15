@@ -38,6 +38,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @item = @packing_list.items.find(params[:id])
+    @item.destroy
+    redirect_to packing_list_items_path(@packing_list), notice: "持ち物を削除しました"
+  end
+
   private
 
   def set_packing_list

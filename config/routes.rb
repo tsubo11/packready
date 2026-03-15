@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root "static_pages#top"
 
   resources :packing_lists, only: [:index, :new, :create, :show, :edit, :update] do
-    resources :items, only: [:index, :new, :create, :edit, :update] do
+    resources :items, only: [:index, :new, :create, :edit, :update, :destroy] do
       member do
         patch :check
       end
