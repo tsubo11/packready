@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   root "static_pages#top"
 
   resources :packing_lists, only: [:index, :new, :create, :show, :edit, :update] do
-    resources :items, only: [:index, :new, :create]
+    resources :items, only: [:index, :new, :create] do
+      member do
+        patch :check
+      end
+    end
   end
   # Defines the root path route ("/")
   # root "posts#index"
