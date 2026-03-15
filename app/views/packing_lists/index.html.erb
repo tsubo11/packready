@@ -12,22 +12,37 @@
     <% else %>
       <div class="space-y-3">
         <% @packing_lists.each do |list| %>
-          <%= link_to packing_list_path(list), class: "block" do %>
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 relative">
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 relative"
+               data-controller="dropdown"
+               data-action="click@window->dropdown#close">
 
-              <%# ︙ボタン %>
-              <button class="absolute top-3 right-3 text-gray-400 text-xl leading-none">⋮</button>
-
-              <h2 class="text-lg font-bold text-brown font-nunito pr-6"><%= list.name %></h2>
-
+            <%# カード本体（show画面へのリンク）%>
+            <%= link_to packing_list_path(list), class: "block pr-6" do %>
+              <h2 class="text-lg font-bold text-brown font-nunito"><%= list.name %></h2>
               <% if list.departure_date.present? %>
                 <p class="text-sm text-gray-500 mt-1">
                   出発日：<%= list.departure_date.strftime("%Y/%m/%d") %>
                 </p>
               <% end %>
+            <% end %>
 
+            <%# ︙ボタン %>
+            <button class="absolute top-3 right-3 text-gray-400 text-xl leading-none"
+                    data-action="click->dropdown#toggle">⋮</button>
+
+            <%# ドロップダウンメニュー %>
+            <div data-dropdown-target="menu"
+                 class="hidden absolute top-8 right-3 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-20">
+              <%= link_to "編集", edit_packing_list_path(list),
+                  class: "block px-4 py-2 text-sm text-brown hover:bg-cream rounded-t-lg text-center border-b border-gray-100" %>
+              <%= button_to "削除", packing_list_path(list),
+                  method: :delete,
+                  form: { data: { turbo_confirm: "「#{list.name}」を削除しますか？" } },
+                  class: "block w-full px-4 py-2 text-sm text-red-500 hover:bg-cream rounded-b-lg text-center",
+                  form_class: "w-full" %>
             </div>
-          <% end %>
+
+          </div>
         <% end %>
       </div>
     <% end %>
