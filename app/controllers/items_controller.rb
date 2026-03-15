@@ -20,6 +20,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def check
+    @item = @packing_list.items.find(params[:id])
+    @item.update!(checked: !@item.checked)
+  end
+
   private
 
   def set_packing_list

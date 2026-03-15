@@ -18,11 +18,7 @@
     <h2 class="text-base font-bold text-gold border-b border-gold/30 pb-1 mb-4">当日</h2>
     <% if @morning_items.any? %>
       <ul class="space-y-2">
-        <% @morning_items.each do |item| %>
-          <li class="flex items-center gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
-            <span class="text-sm text-brown"><%= item.name %></span>
-          </li>
-        <% end %>
+        <%= render @morning_items %>
       </ul>
     <% else %>
       <p class="text-sm text-brown/40">アイテムはまだありません</p>
@@ -34,11 +30,7 @@
     <h2 class="text-base font-bold text-gold border-b border-gold/30 pb-1 mb-4">前日まで</h2>
     <% if @day_before_items.any? %>
       <ul class="space-y-2">
-        <% @day_before_items.each do |item| %>
-          <li class="flex items-center gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
-            <span class="text-sm text-brown"><%= item.name %></span>
-          </li>
-        <% end %>
+        <%= render @day_before_items %>
       </ul>
     <% else %>
       <p class="text-sm text-brown/40">アイテムはまだありません</p>
