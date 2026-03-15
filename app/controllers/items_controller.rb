@@ -25,6 +25,19 @@ class ItemsController < ApplicationController
     @item.update!(checked: !@item.checked)
   end
 
+  def edit
+    @item = @packing_list.items.find(params[:id])
+  end
+
+  def update
+    @item = @packing_list.items.find(params[:id])
+    if @item.update(item_params)
+      redirect_to packing_list_items_path(@packing_list), notice: "持ち物を更新しました"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_packing_list
