@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   root "static_pages#top"
 
-  resources :packing_lists, only: [:index, :new, :create, :show, :edit, :update] do
+  resources :packing_lists, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
     resources :items, only: [:index, :new, :create, :edit, :update, :destroy] do
       member do
         patch :check

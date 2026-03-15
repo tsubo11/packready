@@ -1,5 +1,5 @@
 class PackingListsController < ApplicationController
-  before_action :set_packing_list, only: [:show, :edit, :update]
+  before_action :set_packing_list, only: [:show, :edit, :update, :destroy]
   
   def index
     @packing_lists = current_user.packing_lists.order(departure_date: :asc)
@@ -32,6 +32,11 @@ class PackingListsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @packing_list.destroy
+    redirect_to packing_lists_path, notice: "リストを削除しました"
   end
 
   private
