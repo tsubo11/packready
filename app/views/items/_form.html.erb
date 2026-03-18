@@ -1,0 +1,23 @@
+<div id="modal-form">
+  <%= form_with model: [@packing_list, @item],
+      data: { turbo: true, action: "turbo:submit-end->modal#submitEnd" } do |f| %>
+    <%= f.hidden_field :timing, value: "", data: { "modal-target": "timing" } %>
+
+    <% if @item.errors.any? %>
+      <div class="mb-3 text-sm text-red-500">
+        <% @item.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= f.text_field :name,
+          placeholder: "持ち物の名前",
+          class: "w-full border border-brown/30 rounded-lg px-3 py-2 text-sm text-brown focus:outline-none focus:border-gold" %>
+    </div>
+
+    <%= f.submit "追加する",
+        class: "w-full bg-gold text-white rounded-lg py-2 text-sm font-bold hover:opacity-90 transition" %>
+  <% end %>
+</div>
