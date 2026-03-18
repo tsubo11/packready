@@ -17,6 +17,7 @@ class ItemsController < ApplicationController
     if @item.save
       @morning_items = @packing_list.items.where(timing: :morning)
       @day_before_items = @packing_list.items.where(timing: :day_before)
+      @item = @packing_list.items.build
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to packing_list_items_path(@packing_list) }
