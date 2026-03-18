@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   def index
     @morning_items = @packing_list.items.where(timing: :morning)
     @day_before_items = @packing_list.items.where(timing: :day_before)
+    @item = @packing_list.items.build
   end
 
   def new
@@ -14,9 +15,17 @@ class ItemsController < ApplicationController
   def create
     @item = @packing_list.items.build(item_params)
     if @item.save
-      redirect_to packing_list_items_path(@packing_list), notice: "アイテムを追加しました"
+      @morning_items = @packing_list.items.where(timing: :morning)
+      @day_before_items = @packing_list.items.where(timing: :day_before)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to packing_list_items_path(@packing_list) }
+      end
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.turbo_stream { render :error, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 

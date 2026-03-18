@@ -1,11 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["overlay", "panel"]
+  static targets = ["overlay", "panel", "timing"]
 
   open(event) {
     const timing = event.currentTarget.dataset.timing
-    this.overlayTarget.dataset.timing = timing
+    this.timingTarget.value = timing
     this.overlayTarget.classList.remove("hidden")
   }
 
@@ -15,6 +15,12 @@ export default class extends Controller {
 
   clickOutside(event) {
     if (!this.panelTarget.contains(event.target)) {
+      this.close()
+    }
+  }
+
+  submitEnd(event) {
+    if (event.detail.success) {
       this.close()
     }
   }

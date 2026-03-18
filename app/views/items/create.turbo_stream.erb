@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "morning-items" do %>
+  <%= render "morning_items" %>
+<% end %>
+
+<%= turbo_stream.replace "day-before-items" do %>
+  <%= render "day_before_items" %>
+<% end %>
+
+<%= turbo_stream.replace "modal-form" do %>
+  <%= render "form" %>
+<% end %>
