@@ -1,3 +1,7 @@
 <%= turbo_stream.replace dom_id(@item) do %>
-  <%= render @item %>
+  <% if params[:source] == "show" %>
+    <%= render "items/check_item", item: @item %>
+  <% else %>
+    <%= render "items/item", item: @item %>
+  <% end %>
 <% end %>
