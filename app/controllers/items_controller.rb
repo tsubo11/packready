@@ -42,9 +42,15 @@ class ItemsController < ApplicationController
   def update
     @item = @packing_list.items.find(params[:id])
     if @item.update(item_params)
-      redirect_to packing_list_items_path(@packing_list), notice: "持ち物を更新しました"
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to packing_list_items_path(@packing_list) }
+      end
     else
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.turbo_stream { render :error_update, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 

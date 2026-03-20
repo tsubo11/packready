@@ -12,3 +12,6 @@ application.register("dropdown", DropdownController)
 
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
+
+import EditModalController from "./edit_modal_controller"
+application.register("edit-modal", EditModalController)
