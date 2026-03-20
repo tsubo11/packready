@@ -1,5 +1,5 @@
 <li id="<%= dom_id(item) %>" class="flex items-center gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
-  <%= form_with url: check_packing_list_item_path(item.packing_list, item), method: :patch do |f| %>
+  <%= form_with url: check_packing_list_item_path(item.packing_list, item, source: "show"), method: :patch do |f| %>
     <%= button_tag type: "submit", class: "w-7 h-7 rounded border-2 flex items-center justify-center flex-shrink-0 #{item.checked ? 'bg-gold border-gold' : 'border-gold/50'}" do %>
       <% if item.checked %>
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
