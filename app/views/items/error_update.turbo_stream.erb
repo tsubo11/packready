@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "edit-modal-#{@item.id}" do %>
+  <%= render "items/edit_form", item: @item, packing_list: @packing_list %>
+<% end %>

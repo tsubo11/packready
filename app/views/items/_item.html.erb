@@ -1,4 +1,8 @@
-<li id="<%= dom_id(item) %>" class="flex items-center gap-3 py-2 px-3 bg-white rounded-lg shadow-sm">
+<li id="<%= dom_id(item) %>"
+    class="flex items-center gap-3 py-2 px-3 bg-white rounded-lg shadow-sm"
+    data-controller="edit-modal">
+
+  <%# チェックボックス %>
   <%= form_with url: check_packing_list_item_path(item.packing_list, item), method: :patch do |f| %>
     <%= button_tag type: "submit", class: "w-7 h-7 rounded border-2 flex items-center justify-center flex-shrink-0 #{item.checked ? 'bg-gold border-gold' : 'border-gold/50'}" do %>
       <% if item.checked %>
@@ -9,8 +13,39 @@
     <% end %>
   <% end %>
 
-  <span class="text-sm <%= item.checked ? 'line-through text-brown/40' : 'text-brown' %>">
+  <%# アイテム名 %>
+  <span class="flex-1 text-sm <%= item.checked ? 'line-through text-brown/40' : 'text-brown' %>">
     <%= item.name %>
   </span>
+
+  <%# 編集・削除ボタン %>
+  <div class="flex items-center gap-3 shrink-0">
+    <button type="button"
+            data-action="edit-modal#open"
+            class="text-xs text-brown/40 hover:text-gold">
+      編集
+    </button>
+    <%= button_to "削除", packing_list_item_path(item.packing_list, item),
+        method: :delete,
+        form: { data: { turbo_confirm: "「#{item.name}」を削除しますか？" } },
+        form_class: "inline-flex items-center",
+        class: "text-xs text-brown/40 hover:text-red-400" %>
+  </div>
+
+  <%# 編集モーダル %>
+  <div data-edit-modal-target="overlay"
+       class="hidden fixed inset-0 z-50 flex items-end justify-center bg-black/40"
+       data-action="click->edit-modal#clickOutside">
+    <div data-edit-modal-target="panel"
+         class="bg-cream rounded-t-2xl shadow-xl w-full max-w-lg p-6">
+      <h2 class="text-lg font-semibold text-brown mb-4">持ち物を編集</h2>
+      <%= render "items/edit_form", item: item, packing_list: @packing_list %>
+      <button type="button"
+          data-action="edit-modal#close"
+          class="mt-4 w-full py-2 text-sm text-brown/60 hover:text-brown">
+        キャンセル
+      </button>
+    </div>
+  </div>
 
 </li>

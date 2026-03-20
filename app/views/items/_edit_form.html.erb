@@ -1,0 +1,24 @@
+<div id="edit-modal-<%= item.id %>">
+  <%= form_with model: [@packing_list, item],
+      data: { action: "turbo:submit-end->edit-modal#submitEnd" } do |f| %>
+
+    <% if item.errors.any? %>
+      <ul class="mb-3 text-sm text-red-500 space-y-1">
+        <% item.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= f.hidden_field :timing %>
+
+    <div class="mb-4">
+      <%= f.text_field :name,
+          class: "w-full border border-brown/30 rounded-lg px-3 py-2 text-sm text-brown focus:outline-none  focus:border-gold",
+          placeholder: "持ち物の名前" %>
+    </div>
+
+    <%= f.submit "保存する",
+        class: "w-full py-2 text-sm bg-gold text-white rounded-lg hover:opacity-90" %>
+    <% end %>
+</div>
