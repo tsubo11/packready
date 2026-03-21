@@ -7,11 +7,6 @@ class ItemsController < ApplicationController
     @item = @packing_list.items.build
   end
 
-  def new
-    @item = @packing_list.items.build
-    @item.timing = params[:timing] if params[:timing].present?
-  end
-
   def create
     @item = @packing_list.items.build(item_params)
     if @item.save
@@ -25,7 +20,7 @@ class ItemsController < ApplicationController
     else
       respond_to do |format|
         format.turbo_stream { render :error, status: :unprocessable_entity }
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to packing_list_items_path(@packing_list) }
       end
     end
   end
@@ -33,10 +28,6 @@ class ItemsController < ApplicationController
   def check
     @item = @packing_list.items.find(params[:id])
     @item.update!(checked: !@item.checked)
-  end
-
-  def edit
-    @item = @packing_list.items.find(params[:id])
   end
 
   def update
@@ -49,7 +40,7 @@ class ItemsController < ApplicationController
     else
       respond_to do |format|
         format.turbo_stream { render :error_update, status: :unprocessable_entity }
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to packing_list_items_path(@packing_list) }
       end
     end
   end
