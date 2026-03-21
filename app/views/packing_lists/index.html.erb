@@ -24,6 +24,7 @@
                   出発日：<%= list.departure_date.strftime("%Y/%m/%d") %>
                 </p>
               <% end %>
+              <%= render "progress", packing_list: list %>
             <% end %>
 
             <%# ︙ボタン %>

@@ -2,7 +2,7 @@ class PackingListsController < ApplicationController
   before_action :set_packing_list, only: [:show, :edit, :update, :destroy]
   
   def index
-    @packing_lists = current_user.packing_lists.order(departure_date: :asc)
+    @packing_lists = current_user.packing_lists.includes(:items).order(departure_date: :asc)
   end
 
   def new
@@ -42,7 +42,7 @@ class PackingListsController < ApplicationController
   private
 
   def set_packing_list
-    @packing_list = current_user.packing_lists.find(params[:id])
+    @packing_list = current_user.packing_lists.includes(:items).find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render file: "#{Rails.root}/public/404.html", status: :not_found, layout: false
   end
