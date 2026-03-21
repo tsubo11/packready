@@ -5,7 +5,7 @@
     <%= link_to "編集", packing_list_items_path(@packing_list), class: "absolute right-0 text-sm text-gold font-semibold" %>
   </div>
 
-  <div class="text-center text-sm text-brown/60 mb-8">
+  <div class="text-sm text-brown/60 mb-8">
     <% if @packing_list.departure_date %>
       出発日：<%= @packing_list.departure_date.strftime("%Y年%m月%d日") %>
     <% else %>
@@ -14,26 +14,26 @@
   </div>
 
   <%# 当日朝セクション（上に配置） %>
-  <section class="mb-8">
-    <h2 class="text-base font-bold text-gold border-b border-gold/30 pb-1 mb-4">当日</h2>
+  <section class="mb-6 border border-gold/20 rounded-xl p-4 bg-gold/5">
+    <h2 class="text-xl font-bold text-gold border-b border-gold/30 pb-1 mb-4">当日</h2>
     <% if @morning_items.any? %>
       <ul class="space-y-2">
         <%= render partial: "items/check_item", collection: @morning_items, as: :item %>
       </ul>
     <% else %>
-      <p class="text-sm text-brown/40">アイテムはまだありません</p>
+      <p class="text-sm text-brown/60">アイテムはまだありません</p>
     <% end %>
   </section>
 
   <%# 前日セクション（下に配置） %>
-  <section class="mb-8">
-    <h2 class="text-base font-bold text-gold border-b border-gold/30 pb-1 mb-4">前日まで</h2>
+  <section class="mb-6 border border-gold/20 rounded-xl p-4 bg-gold/5">
+    <h2 class="text-xl font-bold text-gold border-b border-gold/30 pb-1 mb-4">前日まで</h2>
     <% if @day_before_items.any? %>
       <ul class="space-y-2">
         <%= render partial: "items/check_item", collection: @day_before_items, as: :item %>
       </ul>
     <% else %>
-      <p class="text-sm text-brown/40">アイテムはまだありません</p>
+      <p class="text-sm text-brown/60">アイテムはまだありません</p>
     <% end %>
   </section>
 </div>
