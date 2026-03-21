@@ -3,7 +3,7 @@
 
   <%# ヘッダー %>
     <div class="relative flex items-center justify-center mb-4 w-full">
-    <%= link_to root_path, class: "absolute left-0 text-brown text-xl font-bold" do %>
+    <%= link_to packing_lists_path, class: "absolute left-0 text-brown text-xl font-bold" do %>
         ←
     <% end %>
     <h1 class="text-4xl font-bold text-brown tracking-wide">リスト作成</h1>
@@ -29,7 +29,7 @@
     <div>
       <%= f.label :name, "リスト名", class: "block text-sm font-semibold text-brown mb-2" %>
       <%= f.text_field :name,
-          placeholder: "大阪旅行",
+          placeholder: "旅行",
           class: "w-full px-4 py-3 border border-brown-mid rounded-xl bg-white text-text-main placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-gold" %>
     </div>
 
