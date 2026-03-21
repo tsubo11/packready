@@ -8,7 +8,7 @@
 
     <%# リスト一覧 %>
     <% if @packing_lists.empty? %>
-      <p class="text-center text-gray-400 mt-20">リストがありません</p>
+      <p class="text-center text-brown/60 mt-20">リストがありません</p>
     <% else %>
       <div class="space-y-3">
         <% @packing_lists.each do |list| %>
@@ -20,14 +20,14 @@
             <%= link_to packing_list_path(list), class: "block pr-6" do %>
               <h2 class="text-lg font-bold text-brown font-nunito"><%= list.name %></h2>
               <% if list.departure_date.present? %>
-                <p class="text-sm text-gray-500 mt-1">
+                <p class="text-sm text-brown/60 mt-1">
                   出発日：<%= list.departure_date.strftime("%Y/%m/%d") %>
                 </p>
               <% end %>
             <% end %>
 
             <%# ︙ボタン %>
-            <button class="absolute top-3 right-3 text-gray-400 text-xl leading-none"
+            <button class="absolute top-3 right-3 text-brown/60 text-xl leading-none"
                     data-action="click->dropdown#toggle">⋮</button>
 
             <%# ドロップダウンメニュー %>
