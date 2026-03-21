@@ -291,11 +291,15 @@ UI・体験の改善：
 
 ## 10. 技術スタック
 
-### 10-1. 使用予定の技術
+### 10-1. 使用技術
 
-- バックエンド：Ruby on Rails
-- DB：PostgreSQL
+- Ruby 3.2.7
+- Ruby on Rails 7.1.5
+- Hotwire（Turbo + Stimulus）
+- Tailwind CSS v4
+- PostgreSQL(Neon)
 - 開発環境：Docker
+- バージョン管理：GitHub
 - デプロイ先：Render
 - 認証：devise
 
