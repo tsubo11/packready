@@ -23,6 +23,8 @@
                 <p class="text-sm text-brown/60 mt-1">
                   出発日：<%= list.departure_date.strftime("%Y/%m/%d") %>
                 </p>
+              <% else %>
+                <p class="text-sm text-brown/60 mt-1">出発日未定</p>
               <% end %>
               <%= render "progress", packing_list: list %>
             <% end %>
