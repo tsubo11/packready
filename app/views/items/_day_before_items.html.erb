@@ -1,5 +1,9 @@
 <ul id="day-before-items" class="space-y-2 mb-3">
-  <% @day_before_items.each do |item| %>
-    <%= render "items/item", item: item %>
+  <% if @day_before_items.any? %>
+    <% @day_before_items.each do |item| %>
+      <%= render "items/item", item: item %>
+    <% end %>
+  <% else %>
+    <p class="text-sm text-brown/60">アイテムはまだありません</p>
   <% end %>
 </ul>

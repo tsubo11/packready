@@ -13,11 +13,7 @@
 
   <section class="mb-8">
     <h2 class="text-xl font-bold text-gold border-b border-brown/30 pb-1 mb-4">当日</h2>
-    <% if @morning_items.any? %>
       <%= render "morning_items" %>
-    <% else %>
-      <p class="text-sm text-brown/60 mb-3">アイテムはまだありません</p>
-    <% end %>
     <button
       data-action="click->modal#open"
       data-timing="morning"
@@ -28,11 +24,7 @@
 
   <section class="mb-8">
     <h2 class="text-xl font-bold text-gold border-b border-brown/30 pb-1 mb-4">前日まで</h2>
-    <% if @day_before_items.any? %>
       <%= render "day_before_items" %>
-    <% else %>
-      <p class="text-sm text-brown/60 mb-3">アイテムはまだありません</p>
-    <% end %>
     <button
       data-action="click->modal#open"
       data-timing="day_before"
