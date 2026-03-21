@@ -7,6 +7,8 @@
   <p class="text-sm text-brown/60 mb-1">旅行名：<%= @packing_list.name %></p>
   <% if @packing_list.departure_date %>
     <p class="text-sm text-brown/60 mb-6">出発日：<%= @packing_list.departure_date.strftime("%Y年%m月%d日") %></p>
+  <% else %>
+    <p class="text-sm text-brown/60 mb-6">出発日未定</p>
   <% end %>
 
   <section class="mb-8">
@@ -14,7 +16,7 @@
     <% if @morning_items.any? %>
       <%= render "morning_items" %>
     <% else %>
-      <p class="text-sm text-brown/40 mb-3">アイテムはまだありません</p>
+      <p class="text-sm text-brown/60 mb-3">アイテムはまだありません</p>
     <% end %>
     <button
       data-action="click->modal#open"
@@ -29,7 +31,7 @@
     <% if @day_before_items.any? %>
       <%= render "day_before_items" %>
     <% else %>
-      <p class="text-sm text-brown/400 mb-3">アイテムはまだありません</p>
+      <p class="text-sm text-brown/60 mb-3">アイテムはまだありません</p>
     <% end %>
     <button
       data-action="click->modal#open"
