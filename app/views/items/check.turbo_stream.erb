@@ -5,3 +5,7 @@
     <%= render "items/item", item: @item %>
   <% end %>
 <% end %>
+
+<%= turbo_stream.replace dom_id(@item.packing_list, :progress) do %>
+  <%= render "packing_lists/progress", packing_list: @item.packing_list %>
+<% end %>

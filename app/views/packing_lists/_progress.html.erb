@@ -1,0 +1,4 @@
+<div id="<%= dom_id(packing_list, :progress) %>" class="flex gap-4 text-sm text-brown/60">
+  <span>当日：<%= packing_list.morning_progress[:checked] %>/<%= packing_list.morning_progress[:total] %></span>
+  <span>前日：<%= packing_list.day_before_progress[:checked] %>/<%= packing_list.day_before_progress[:total] %></span>
+</div>
