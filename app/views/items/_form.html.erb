@@ -1,10 +1,10 @@
 <div id="modal-form">
   <%= form_with model: [@packing_list, @item],
       data: { turbo: true, action: "turbo:submit-end->modal#submitEnd" } do |f| %>
-    <%= f.hidden_field :timing, value: "", data: { "modal-target": "timing" } %>
+    <%= f.hidden_field :timing, data: { "modal-target": "timing" } %>
 
     <% if @item.errors.any? %>
-      <div class="mb-3 text-sm text-red-500">
+      <div id="modal-form-errors" class="mb-3 text-sm text-red-500">
         <% @item.errors.full_messages.each do |msg| %>
           <p><%= msg %></p>
         <% end %>
