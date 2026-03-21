@@ -11,6 +11,8 @@ export default class extends Controller {
 
   close() {
     this.overlayTarget.classList.add("hidden")
+    const errorDiv = document.getElementById("modal-form-errors")
+    if (errorDiv) errorDiv.remove()
   }
 
   clickOutside(event) {

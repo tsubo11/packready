@@ -1,5 +1,9 @@
 <ul id="morning-items" class="space-y-2 mb-3">
-  <% @morning_items.each do |item| %>
-    <%= render "items/item", item: item %>
+  <% if @morning_items.any? %>
+    <% @morning_items.each do |item| %>
+      <%= render "items/item", item: item %>
+    <% end %>
+  <% else %>
+    <p class="text-sm text-brown/60">アイテムはまだありません</p>
   <% end %>
 </ul>

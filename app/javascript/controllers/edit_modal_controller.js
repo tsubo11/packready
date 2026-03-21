@@ -9,6 +9,11 @@ export default class extends Controller {
 
   close() {
     this.overlayTarget.classList.add("hidden")
+    const errorList = this.element.querySelector(".text-red-500")
+    if (errorList) errorList.remove()
+    const nameInput = this.element.querySelector("input[name='item[name]']")
+    const originalName = this.element.querySelector("[data-item-name]").dataset.itemName
+    if (nameInput) nameInput.value = originalName
   }
 
   clickOutside(event) {
