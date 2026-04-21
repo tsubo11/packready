@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   root "static_pages#top"
 
   # パッキングリストのルーティング
-  resources :packing_lists, only: %[ index new create show edit update destroy ] do
+  resources :packing_lists, only: %i[ index new create show edit update destroy ] do
     # itemsは必ずpacking_listsに属するためネスト
-    resources :items, only: %[ index create update destroy ] do
+    resources :items, only: %i[ index create update destroy ] do
       # 特定の1件に対して操作するという意味。memberを使用することでURLにitemのidが入る
       member do
         # checkdカラムのtrue/falseを更新する
