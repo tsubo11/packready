@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  # Diviseが提供する認証関連のルーティングを一括生成
+  # Deviseが提供する認証関連のルーティングを一括生成
   devise_for :users
 
   # トップURL(/)にアクセスしたとき、StaticPagesControllerのtopアクションが実行される
@@ -18,6 +18,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # アプリが動いているかのヘルスチェック
+  # /upへのアクセスでアプリが動いているかのヘルスチェック。ステータスコード200で正常、５００で異常。
   get "up" => "rails/health#show", as: :rails_health_check
 end
