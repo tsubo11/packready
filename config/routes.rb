@@ -1,19 +1,23 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # Diviseが提供する認証関連のルーティングを一括生成
+  devise_for :users
+
+  # トップURL(/)にアクセスしたとき、StaticPagesControllerのtopアクションが実行される
   root "static_pages#top"
 
-  resources :packing_lists, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
-    resources :items, only: [:index, :create, :update, :destroy] do
+  # パッキングリストのルーティング
+  resources :packing_lists, only: %[ index new create show edit update destroy ] do
+    # itemsは必ずpacking_listsに属するためネスト
+    resources :items, only: %[ index create update destroy ] do
+      # 特定の1件に対して操作するという意味。memberを使用することでURLにitemのidが入る
       member do
+        # checkdカラムのtrue/falseを更新する
         patch :check
       end
     end
   end
-  # Defines the root path route ("/")
-  # root "posts#index"
+
+  # アプリが動いているかのヘルスチェック
+  get "up" => "rails/health#show", as: :rails_health_check
 end
