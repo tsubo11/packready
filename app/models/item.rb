@@ -9,5 +9,5 @@ class Item < ApplicationRecord
   validates :timing, presence: true
 
   # 各タイミングを表す整数に対して、名前を割り当てる
-  enum timing: { morning: 0, day_before: 1 }
+  enum :timing, { morning: 0, day_before: 1 }
 end

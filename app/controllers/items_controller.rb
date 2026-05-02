@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.turbo_stream { render :error, status: :unprocessable_entity }
+        format.turbo_stream { render :error, status: :unprocessable_content }
         format.html { redirect_to packing_list_items_path(@packing_list) }
       end
     end
@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.turbo_stream { render :error_update, status: :unprocessable_entity }
+        format.turbo_stream { render :error_update, status: :unprocessable_content }
         format.html { redirect_to packing_list_items_path(@packing_list) }
       end
     end
@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
   def set_packing_list
     @packing_list = current_user.packing_lists.find(params[:packing_list_id])
   rescue ActiveRecord::RecordNotFound
-    render file: "#{Rails.root}/public/404.html", status: :not_found, layout: false
+    render file: Rails.public_path.join('404.html').to_s, status: :not_found, layout: false
   end
 
   def item_params
