@@ -5,8 +5,16 @@ class PackingListsController < ApplicationController
     @packing_lists = current_user.packing_lists.includes(:items).order(departure_date: :asc)
   end
 
+  def show
+    @morning_items = @packing_list.items.where(timing: :morning)
+    @day_before_items = @packing_list.items.where(timing: :day_before)
+  end
+
   def new
     @packing_list = current_user.packing_lists.build
+  end
+
+  def edit
   end
 
   def create
@@ -14,23 +22,15 @@ class PackingListsController < ApplicationController
     if @packing_list.save
       redirect_to packing_list_path(@packing_list), notice: "リストを作成しました"
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
-  end
-
-  def show
-    @morning_items = @packing_list.items.where(timing: :morning)
-    @day_before_items = @packing_list.items.where(timing: :day_before)
-  end
-
-  def edit
   end
 
   def update
     if @packing_list.update(packing_list_params)
       redirect_to packing_list_path(@packing_list), notice: "リストを更新しました"
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -44,7 +44,7 @@ class PackingListsController < ApplicationController
   def set_packing_list
     @packing_list = current_user.packing_lists.includes(:items).find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render file: "#{Rails.root}/public/404.html", status: :not_found, layout: false
+    render file: Rails.public_path.join('404.html').to_s, status: :not_found, layout: false
   end
 
   def packing_list_params
