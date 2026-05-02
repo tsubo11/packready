@@ -1,10 +1,10 @@
 class Item < ApplicationRecord
   # アソシエーション
-  # ItemがPackingListに属している
+  # itemはpacking_listに属している
   belongs_to :packing_list
 
   # バリデーション
-  # 入力必須とする
+  # 不完全なデータがDBに入るのを防ぐため入力必須とする
   validates :name, presence: true
   validates :timing, presence: true
 
