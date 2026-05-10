@@ -69,7 +69,7 @@ class PackingListsController < ApplicationController
   end
 
   def packing_list_params
-    # フォームから送られてきたデータ全体からpacking_listの3つのデータを許可する
+    # フォームから送られてきたデータ全体からpacking_listのデータの受取を許可する
     params.require(:packing_list).permit(:name, :departure_date, :notification_time)
   end
 end
