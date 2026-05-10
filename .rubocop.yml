@@ -14,3 +14,7 @@ AllCops:
     - "db/migrate/**/*"
     - "node_modules/**/*"
     - "vendor/**/*"
+
+# contextを日本語で書けるようにする
+RSpec/ContextWording:
+  Enabled: false
