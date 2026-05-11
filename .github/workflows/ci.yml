@@ -61,6 +61,12 @@ jobs:
           bundle exec rails db:create RAILS_ENV=test
           bundle exec rails db:migrate RAILS_ENV=test
 
+      # CI環境でアセット（CSSやJS）をコンパイル
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile
+        env:
+          RAILS_ENV: test
+
       # RSpecを実行してテストが全て通るか確認する
       - name: Run RSpec
         run: bundle exec rspec
