@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      # リポジトリのコードをクローンする
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # CI環境にRuby 3.2.7をインストールする
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.7
+          bundler-cache: true
+
+      # RuboCopを実行してコードスタイルをチェックする
+      - name: Run RuboCop
+        run: bundle exec rubocop
+
+  rspec:
+    # RSpec用にPostgreSQL 16のDBサーバーを起動する
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: myapp_test
+        # DBが完全に起動してからRSpecが走るように待機させる設定
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.7
+          bundler-cache: true
+
+      #  CI用のDB設定ファイルを適用し、テスト用DBを作成してマイグレーションを実行する
+      - name: Set up database
+        run: |
+          cp config/database.yml.ci config/database.yml
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
+
+      # CI環境でアセット（CSSやJS）をコンパイル
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile
+        env:
+          RAILS_ENV: test
+
+      # RSpecを実行してテストが全て通るか確認する
+      - name: Run RSpec
+        run: bundle exec rspec
