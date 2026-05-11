@@ -1,0 +1,14 @@
+test:
+  # テスト環境でPostgreSQLを使うことを指定
+  adapter: postgresql
+  # 文字コードをUnicodeに設定する
+  # 日本語が文字化けしないために必要
+  encoding: unicode
+  # CI上で起動したPostgreSQLサーバーの接続先
+  # CI環境ではlocalhostになる
+  host: localhost
+  # ci.ymlのservicesで設定したDB接続用のユーザー名とパスワード
+  username: postgres
+  password: password
+  # 接続するDB名
+  database: myapp_test
