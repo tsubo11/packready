@@ -12,7 +12,7 @@ class PackingListsController < ApplicationController
   def show
     # 当日セクションの持ち物を取得
     @morning_items = @packing_list.items.where(timing: :morning)
-    #　前日セクションの持ち物を取得
+    # 　前日セクションの持ち物を取得
     @day_before_items = @packing_list.items.where(timing: :day_before)
   end
 
