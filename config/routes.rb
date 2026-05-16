@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   # トップURL(/)にアクセスしたとき、StaticPagesControllerのtopアクションが実行される
   root "static_pages#top"
 
+  # 利用規約・プライバシーポリシー
+  get "/terms" => "static_pages#terms", as: :terms
+  get "/privacy" => "static_pages#privacy", as: :privacy
+
   # パッキングリストのルーティング
   resources :packing_lists, only: %i[ index new create show edit update destroy ] do
     # itemsは必ずpacking_listsに属するためネスト
