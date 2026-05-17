@@ -13,6 +13,13 @@
   <%# フォーム %>
   <div class="w-full max-w-xs">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <% if resource.errors.any? %>
+      <div class="mb-4 p-4 rounded-2xl bg-red-50 border border-red-200">
+        <% resource.errors.full_messages.each do |msg| %>
+          <p class="font-dm text-sm text-red-600"><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
       <div class="flex flex-col gap-4 mb-6">
         <div>
           <%= f.label :email, "メールアドレス", class: "block font-dm text-sm text-text-main mb-1" %>
