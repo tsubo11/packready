@@ -14,6 +14,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Google tag (gtag.js) -->
@@ -32,15 +33,35 @@
     <% end %>
 
     <%# ナビゲーションバー %>
-  <% if user_signed_in? %>
-    <nav class="flex items-center justify-between px-5 py-3 bg-cream border-b border-gold/20">
-      <%= link_to "PackReady", root_path,
-          class: "font-nunito font-black text-lg text-text-main" %>
-      <%= link_to "ログアウト", destroy_user_session_path,
+    <nav class="flex items-center justify-between px-5 py-3 bg-brown">
+      <%= link_to root_path, class: "flex items-center gap-2" do %>
+        <div class="flex items-center justify-center w-7 h-7 rounded-lg bg-gold">
+          <svg width="25" height="25" viewBox="0 0 48 48" fill="none">
+            <path d="M17 16C17 12 20 10 24 10C28 10 31 12 31 16"
+              stroke="#3d2b1f" stroke-width="2.5" stroke-linecap="round"/>
+            <rect x="8" y="16" width="32" height="22" rx="4"
+              fill="rgba(61,43,31,0.1)" stroke="#3d2b1f" stroke-width="2.5"/>
+            <polyline points="16,28 21,34 32,22"
+                  stroke="#3d2b1f" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="font-nunito font-black text-base text-cream">Pack<span class="text-gold">Ready</span></span>
+      <% end %>
+
+      <% if user_signed_in? %>
+        <%= link_to "ログアウト", destroy_user_session_path,
           data: { turbo_method: :delete },
-          class: "font-dm text-sm text-text-muted opacity-45 hover:opacity-100 transition-colors" %>
+          class: "px-4 py-2 rounded-lg bg-gold text-brown text-sm font-bold" %>
+      <% else %>
+        <div class="flex gap-2">
+          <%= link_to "新規登録", new_user_registration_path,
+            class: "px-4 py-2 rounded-lg border border-gold text-gold text-sm font-semibold" %>
+          <%= link_to "ログイン", new_user_session_path,
+            class: "px-4 py-2 rounded-lg bg-gold text-brown text-sm font-bold" %>
+        </div>
+      <% end %>
     </nav>
-  <% end %>
   
     <%= yield %>
   </body>

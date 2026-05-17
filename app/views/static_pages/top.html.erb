@@ -1,40 +1,92 @@
-<div class="min-h-screen flex flex-col items-center justify-center px-5 py-16 bg-cream">
 
-  <%# ロゴアイコン %>
-  <div class="flex items-center justify-center w-22 h-22 rounded-3xl bg-brown mb-6">
-    <svg width="50" height="50" viewBox="0 0 48 48" fill="none">
-      <path d="M17 16C17 12 20 10 24 10C28 10 31 12 31 16"
-            stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round"/>
-      <rect x="8" y="16" width="32" height="22" rx="4"
-            fill="rgba(201,168,76,0.1)" stroke="#c9a84c" stroke-width="2.5"/>
-      <polyline points="16,28 21,34 32,22"
-                stroke="#e8c96a" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+  <%# ヒーローセクション %>
+  <div class="bg-cream flex flex-col items-center text-center px-6 pt-16 pb-10">
+    <div class="flex items-center justify-center w-55 h-55 rounded-2xl bg-brown mb-10 pt-8">
+      <svg width="150" height="150" viewBox="0 0 48 48" fill="none">
+        <path d="M17 16C17 12 20 10 24 10C28 10 31 12 31 16"
+              stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="8" y="16" width="32" height="22" rx="4"
+              fill="rgba(201,168,76,0.1)" stroke="#c9a84c" stroke-width="2.5"/>
+        <polyline points="16,28 21,34 32,22"
+                  stroke="#e8c96a" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <p class="font-nunito text-4xl font-black tracking-tight text-brown mb-1">
+      Pack<span class="text-gold">Ready</span>
+    </p>
+    <p class="font-dm text-sm text-text-muted mb-7">宿泊準備を、タイミングで整理するアプリ</p>
+
+    <h1 class="font-nunito text-xl font-black text-brown leading-relaxed mb-3">
+      入れ忘れゼロへ。<br>タイミング別に管理する<br>パッキングリスト
+    </h1>
+    <p class="font-dm text-sm text-text-muted leading-relaxed mb-7">
+      「前日に準備するもの」と「当日朝に持つもの」を<br>分けて管理。準備の抜け漏れをなくせる。
+    </p>
+
+    <div class="flex flex-col gap-3 w-full max-w-xs">
+      <%= link_to "無料で始める", new_user_registration_path,
+            class: "block w-full py-4 rounded-xl bg-brown text-gold font-nunito text-base font-extrabold text-center" %>
+      <%= link_to "ログイン", new_user_session_path,
+            class: "block w-full py-4 rounded-xl border-2 border-gold text-gold font-nunito text-base font-extrabold text-center" %>
+    </div>
   </div>
 
-  <%# ロゴテキスト %>
-  <p class="font-nunito text-4xl font-black tracking-tight text-text-main mb-3">
-    Pack<span class="text-gold">Ready</span>
-  </p>
-
-  <%# タグライン %>
-  <p class="font-dm text-sm text-text-muted mb-14">
-    宿泊準備を、タイミングで整理するアプリ
-  </p>
-
-  <%# ボタングループ %>
-  <div class="flex flex-col gap-4 w-full max-w-xs mb-10">
-    <%= link_to "新規登録", new_user_registration_path,
-          class: "block w-full py-4 rounded-2xl bg-brown text-white font-nunito text-lg font-extrabold text-center hover:bg-brown-mid transition-colors" %>
-    <%= link_to "ログイン", new_user_session_path,
-          class: "block w-full py-4 rounded-2xl border-2 border-gold text-gold font-nunito text-lg font-extrabold text-center hover:bg-gold/10 transition-colors" %>
+  <%# 3ステップセクション %>
+  <div class="bg-cream px-5 pb-10">
+    <h2 class="font-nunito text-lg font-black text-brown text-center mb-6">使い方は3ステップ</h2>
+    <div class="grid grid-cols-3 gap-3">
+      <% [
+        { num: 1, title: "旅行を登録", desc: "リスト名と出発日を入力するだけ" },
+        { num: 2, title: "持ち物を追加", desc: "前日 / 当日朝のどちらかに分類して登録" },
+        { num: 3, title: "チェックして出発", desc: "当日は確認しながらチェックするだけ" }
+      ].each do |step| %>
+        <div class="border border-gold/50 rounded-2xl p-4 text-center">
+          <div class="flex items-center justify-center w-8 h-8 rounded-full bg-brown text-gold font-nunito font-black text-sm mx-auto mb-3">
+            <%= step[:num] %>
+          </div>
+          <p class="font-nunito font-black text-sm text-brown mb-2"><%= step[:title] %></p>
+          <p class="font-dm text-xs text-text-muted leading-relaxed"><%= step[:desc] %></p>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <%# フッターリンク %>
-  <div class="flex gap-6">
+  <%# できることセクション %>
+  <div class="bg-brown px-5 py-8">
+    <h2 class="font-nunito text-base font-black text-gold text-center mb-5">PackReadyでできること</h2>
+    <div class="flex flex-col gap-4">
+      <% [
+        { icon: "ti ti-clock-hour-3", title: "タイミング別に管理", desc: "「前日」「当日朝」で分類。当日あわてない準備が実現する。" },
+        { icon: "ti ti-square-check", title: "シンプルなチェックリスト", desc: "タップひとつでチェック。荷物を確認しながら詰められる。" },
+        { icon: "ti-device-mobile", title: "スマホでいつでも確認", desc: "旅先でも移動中でもアクセス可能。ブラウザだけで使える。" }
+      ].each do |feat| %>
+        <div class="flex items-start gap-3">
+          <div class="flex items-center justify-center w-9 h-9 rounded-lg bg-gold/15 flex-shrink-0">
+            <i class="ti <%= feat[:icon] %> text-gold text-2xl"></i>
+          </div>
+          <div>
+            <p class="font-nunito font-bold text-sm text-cream mb-1"><%= feat[:title] %></p>
+            <p class="font-dm text-xs leading-relaxed" style="color: #b8967a;"><%= feat[:desc] %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%# フッターCTA %>
+  <div class="bg-cream px-6 py-10 text-center">
+    <h2 class="font-nunito font-black text-lg text-brown mb-2">さあ、荷造りを始めよう</h2>
+    <p class="font-dm text-sm text-text-muted leading-relaxed mb-6">
+      登録無料。次の旅から、<br>出発当日の「忘れた」をなくそう。
+    </p>
+    <%= link_to "無料で始める", new_user_registration_path,
+          class: "inline-block w-full max-w-xs py-4 rounded-xl bg-brown text-gold font-nunito text-base font-extrabold text-center" %>
+  </div>
+
+  <%# フッター %>
+  <footer class="border-t border-gold/20 py-4 flex justify-center gap-6">
     <%= link_to "プライバシーポリシー", privacy_path, class: "font-dm text-xs text-text-muted opacity-45" %>
     <%= link_to "利用規約", terms_path, class: "font-dm text-xs text-text-muted opacity-45" %>
-  </div>
-
-</div>
+  </footer>
