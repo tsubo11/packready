@@ -1,3 +1,11 @@
-<%= turbo_stream.replace dom_id(@item) do %>
+<%= turbo_stream.remove dom_id(@item) %>
+
+<% if @item.timing == "morning" %>
+  <% target = "morning-items" %>
+<% else %>
+  <% target = "day-before-items" %>
+<% end %>
+  
+<%= turbo_stream.append target do %>
   <%= render "items/item", item: @item %>
 <% end %>
