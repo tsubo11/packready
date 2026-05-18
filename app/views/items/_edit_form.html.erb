@@ -10,7 +10,11 @@
       </ul>
     <% end %>
 
-    <%= f.hidden_field :timing %>
+    <%= f.radio_button :timing, :morning %>
+    <%= f.label :morning, "当日" %>
+
+    <%= f.radio_button :timing, :day_before %>
+    <%= f.label :day_before, "前日まで" %>
 
     <div class="mb-4">
       <%= f.text_field :name,
