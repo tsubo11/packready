@@ -10,11 +10,19 @@
       </ul>
     <% end %>
 
-    <%= f.radio_button :timing, :morning %>
-    <%= f.label :morning, "当日" %>
+  <div class="flex gap-4 mb-4">
+  <label class="flex items-center gap-2 cursor-pointer">
+    <%= f.radio_button :timing, :morning,
+        class: "w-4 h-4 accent-[#c9a84c] cursor-pointer" %>
+    <span class="text-sm text-brown font-dm">当日</span>
+  </label>
 
-    <%= f.radio_button :timing, :day_before %>
-    <%= f.label :day_before, "前日まで" %>
+  <label class="flex items-center gap-2 cursor-pointer">
+    <%= f.radio_button :timing, :day_before,
+        class: "w-4 h-4 accent-[#c9a84c] cursor-pointer" %>
+    <span class="text-sm text-brown font-dm">前日まで</span>
+  </label>
+</div>
 
     <div class="mb-4">
       <%= f.text_field :name,
