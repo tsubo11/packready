@@ -1,4 +1,25 @@
-<div id="<%= dom_id(packing_list, :progress) %>" class="flex gap-4 text-sm text-brown/60">
-  <span>当日：<%= packing_list.morning_progress[:checked] %>/<%= packing_list.morning_progress[:total] %></span>
-  <span>前日：<%= packing_list.day_before_progress[:checked] %>/<%= packing_list.day_before_progress[:total] %></span>
+<div id="<%= dom_id(packing_list, :progress) %>" class="mt-2 space-y-2">
+  <div>
+    <div class="flex justify-between text-xs text-brown/60 mb-1">
+      <span>当日</span>
+      <span><%= packing_list.morning_progress[:checked] %>/<%= packing_list.morning_progress[:total] %></span>
+    </div>
+    <div class="w-full bg-gold/20 rounded-full h-2">
+      <% morning = packing_list.morning_progress %>
+      <% morning_pct = morning[:total] > 0 ? (morning[:checked].to_f / morning[:total] * 100).round : 0 %>
+      <div class="bg-gold h-2 rounded-full" style="width: <%= morning_pct %>%"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="flex justify-between text-xs text-brown/60 mb-1">
+      <span>前日まで</span>
+      <span><%= packing_list.day_before_progress[:checked] %>/<%= packing_list.day_before_progress[:total] %></span>
+    </div>
+    <div class="w-full bg-gold/20 rounded-full h-2">
+      <% day_before = packing_list.day_before_progress %>
+      <% day_before_pct = day_before[:total] > 0 ? (day_before[:checked].to_f / day_before[:total] * 100).round : 0 %>
+      <div class="bg-gold h-2 rounded-full" style="width: <%= day_before_pct %>%"></div>
+    </div>
+  </div>
 </div>

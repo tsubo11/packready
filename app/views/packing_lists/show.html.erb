@@ -1,8 +1,12 @@
 <div class="max-w-lg mx-auto px-6 py-8">
   <div class="relative flex items-center justify-center mb-6">
-    <%= link_to "←", packing_lists_path, class: "absolute left-0 text-brown text-xl" %>
+    <%= link_to packing_lists_path, class: "absolute left-0 text-brown text-xl flex items-center gap-1" do %>
+    <i class="ti ti-chevron-left"></i>
+    <span class="text-sm font-dm">戻る</span>
+<% end %>
     <h1 class="text-2xl font-bold text-brown"><%= @packing_list.name %></h1>
-    <%= link_to "編集", packing_list_items_path(@packing_list), class: "absolute right-0 text-sm text-gold font-semibold" %>
+    <%= link_to "持ち物を編集", packing_list_items_path(@packing_list), 
+    class: "absolute right-0 text-sm font-semibold px-3 py-1 rounded-lg border border-gold text-gold" %>
   </div>
 
   <div class="text-sm text-brown/60 mb-8">

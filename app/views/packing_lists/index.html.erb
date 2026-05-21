@@ -36,9 +36,9 @@
             <%# ドロップダウンメニュー %>
             <div data-dropdown-target="menu"
                  class="hidden absolute top-8 right-3 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-20">
-              <%= link_to "編集", edit_packing_list_path(list),
+              <%= link_to "リスト名・出発日を編集", edit_packing_list_path(list),
                   class: "block px-4 py-2 text-sm text-brown hover:bg-cream rounded-t-lg text-center border-b border-gray-100" %>
-              <%= button_to "削除", packing_list_path(list),
+              <%= button_to "リストを削除", packing_list_path(list),
                   method: :delete,
                   form: { data: { turbo_confirm: "「#{list.name}」を削除しますか？" } },
                   class: "block w-full px-4 py-2 text-sm text-red-500 hover:bg-cream rounded-b-lg text-center",
