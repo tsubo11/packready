@@ -1,0 +1,48 @@
+<div class="min-h-screen flex flex-col items-center justify-center px-5 py-16 bg-cream">
+
+  <%# ロゴテキスト %>
+  <p class="font-nunito text-4xl font-black tracking-tight text-text-main mb-14">
+    パスワード変更
+  </p>
+
+  <%# フォーム %>
+  <div class="w-full max-w-xs">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <% if resource.errors.any? %>
+        <div class="mb-4 p-4 rounded-2xl bg-red-50 border border-red-200">
+          <% resource.errors.full_messages.each do |msg| %>
+            <p class="font-dm text-sm text-red-600"><%= msg %></p>
+          <% end %>
+        </div>
+      <% end %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div class="flex flex-col gap-4 mb-6">
+      <div>
+        <%= f.label :password, "新しいパスワード", class: "block font-dm text-sm text-text-main mb-1" %>
+        <% if @minimum_password_length %>
+          <p class="font-dm text-xs text-text-muted mt-1"><%= @minimum_password_length %>文字以上</p>
+        <% end %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "new-password",
+            class: "w-full px-4 py-3 rounded-2xl border-2 border-gold/30 bg-cream text-text-main font-dm text-sm focus:outline-none focus:border-gold transition-colors" %>
+      </div>
+
+      <div>
+        <%= f.label :password_confirmation, "パスワード確認", class: "block font-dm text-sm text-text-main mb-1" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password",
+            class: "w-full px-4 py-3 rounded-2xl border-2 border-gold/30 bg-cream text-text-main font-dm text-sm focus:outline-none focus:border-gold transition-colors" %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.submit "パスワード変更",
+          class: "block w-full py-4 rounded-2xl bg-brown text-white font-nunito text-lg font-extrabold text-center cursor-pointer hover:bg-brown-mid transition-colors" %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="mt-6 text-center">
+    <%= link_to "ログイン画面へ", new_session_path(resource_name),
+        class: "font-dm text-xs text-text-muted opacity-45" %>
+  </div>
+</div>

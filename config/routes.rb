@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   # Deviseが提供する認証関連のルーティングを一括生成
   devise_for :users
 
+  # パスワードリセットのメールをブラウザで確認
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   # トップURL(/)にアクセスしたとき、StaticPagesControllerのtopアクションが実行される
   root "static_pages#top"
 
