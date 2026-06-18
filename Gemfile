@@ -79,6 +79,10 @@ end
 # 認証
 gem "devise"
 
+# LINEログイン
+gem "omniauth-line"
+gem "omniauth-rails_csrf_protection"
+
 # 日本語対応
 gem "devise-i18n"
 gem "rails-i18n"
