@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   # Deviseが提供する認証関連のルーティングを一括生成
-  devise_for :users
+  # コールバックのコントローラーを指定
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   # パスワードリセットのメールをブラウザで確認
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
