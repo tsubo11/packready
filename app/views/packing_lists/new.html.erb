@@ -34,14 +34,48 @@
     </div>
 
     <div>
-  <%= f.label :departure_date, "出発日", class: "block text-sm font-semibold text-brown mb-2" %>
-  <%= f.date_field :departure_date,
-      class: "w-full px-4 py-3 border border-brown-mid rounded-xl bg-white text-text-main focus:outline-none focus:ring-2 focus:ring-gold" %>
-</div>
+      <%= f.label :departure_date, "出発日", class: "block text-sm font-semibold text-brown mb-2" %>
+      <%= f.date_field :departure_date,
+        class: "w-full px-4 py-3 border border-brown-mid rounded-xl bg-white text-text-main focus:outline-none focus:ring-2 focus:ring-gold" %>
+    </div>
+
+    <%# Stimulusの管理範囲 %>
+    <%# 追加方法選択 %>
+    <div data-controller="packing-mode">
+      <div class="flex gap-4 mb-4">
+        <label class="flex items-center gap-2 accent-[#c9a84c] cursor-pointer">
+          <%= f.radio_button :mode, "manual", checked: true,
+              data: { action: "change->packing-mode#toggle" } %>
+          <span class="text-sm font-semibold text-brown">手動で追加</span>
+        </label>
+        <label class="flex items-center gap-2 accent-[#c9a84c] cursor-pointer">
+          <%= f.radio_button :mode, "ai", checked: false,
+              data: { action: "change->packing-mode#toggle" } %>
+          <span class="text-sm font-semibold text-brown">AI提案</span>
+        </label>
+      </div>
+
+      <%# AI選択時のみ表示 %>
+      <div data-packing-mode-target="aiFields" hidden>
+        <div class="mb-4">
+          <%= f.label :destination, "行き先", class: "block text-sm font-semibold text-brown mb-2" %>
+          <%= f.text_field :destination,
+              placeholder: "北海道",
+              class: "w-full px-4 py-3 border border-brown-mid rounded-xl bg-white text-text-main placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-gold" %>
+        </div>
+        <div class="mb-4">
+          <%= f.label :duration_days, "泊数", class: "block text-sm font-semibold text-brown mb-2" %>
+          <%= f.number_field :duration_days,
+              placeholder: "3",
+              min: 1,
+              class: "w-full px-4 py-3 border border-brown-mid rounded-xl bg-white text-text-main placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-gold" %>
+        </div>
+      </div>
+    </div>
 
     <%= f.submit "保存",
         class: "w-full py-3 mt-4 bg-gold text-white font-bold rounded-xl hover:opacity-90 cursor-pointer text-base" %>
-  <% end %>
+    <% end %>
 
   </div>
 </div>

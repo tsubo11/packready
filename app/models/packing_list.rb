@@ -1,5 +1,7 @@
 class PackingList < ApplicationRecord
-  
+  # DBに保存せず一時的に受け取る
+  attr_accessor :mode
+
   # アソシエーション
   # packing_listはuserに属している
   belongs_to :user
@@ -9,6 +11,8 @@ class PackingList < ApplicationRecord
   # バリデーション
   # 不完全なデータがDBに入るのを防ぐため入力必須とする
   validates :name, presence: true
+  validates :destination, presence: true, if: -> { mode == "ai" }
+  validates :duration_days, presence: true, if: -> { mode == "ai" }
 
   # 当日の持ち物準備の進捗を表すメソッド
   # 準備済みの持ち物の数と持ち物の総数をそれぞれカウントする

@@ -15,3 +15,6 @@ application.register("modal", ModalController)
 
 import EditModalController from "./edit_modal_controller"
 application.register("edit-modal", EditModalController)
+
+import PackingModeController from "./packing_mode_controller"
+application.register("packing-mode", PackingModeController)
