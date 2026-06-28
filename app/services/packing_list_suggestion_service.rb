@@ -1,3 +1,4 @@
+# 旅行先と宿泊日数をもとにAnthropicAPIへリクエストを送り、タイミング別持ち物リストを返すサービスクラス
 class PackingListSuggestionService
   def initialize(destination:, duration_days:)
     @destination = destination
