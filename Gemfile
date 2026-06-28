@@ -89,3 +89,6 @@ gem "rails-i18n"
 
 # メール
 gem "resend"
+
+# AI
+gem 'anthropic'
