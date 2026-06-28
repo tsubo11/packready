@@ -38,7 +38,7 @@ class PackingListSuggestionService
 
   def parse_response(response)
     text = response.content.first.text
-    clean_text = text.gsub(/```json\n?/, "").gsub(/```/, "").strip
+    clean_text = text.gsub(/```json\n?/, "").gsub('```', "").strip
     JSON.parse(clean_text)
   rescue JSON::ParserError => e
     Rails.logger.error("JSON parse error: #{e.message}")
