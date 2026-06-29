@@ -39,7 +39,7 @@ class PackingListsController < ApplicationController
         # 提案の取得に成功した場合
         if suggestion
           # 前日までと当日の各itemsを保存する
-          ["day_before", "morning"].each do |timing|
+          %w[day_before morning].each do |timing|
             suggestion[timing]&.each do |item_name|
               @packing_list.items.create!(name: item_name, timing: timing)
             end

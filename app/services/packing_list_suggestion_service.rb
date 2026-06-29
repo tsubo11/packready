@@ -1,7 +1,6 @@
 # 旅行先と宿泊日数をもとにAnthropicAPIへリクエストを送り、タイミング別持ち物リストを返すサービスクラス
 class PackingListSuggestionService
-
-  MODEL = "claude-haiku-4-5"
+  MODEL = "claude-haiku-4-5".freeze
   MAX_TOKENS = 1024
 
   def self.call(destination:, duration_days:)
