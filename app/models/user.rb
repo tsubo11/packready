@@ -5,23 +5,28 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:line]
 
-         has_many :packing_lists, dependent: :destroy
+  has_many :packing_lists, dependent: :destroy
 
   def self.from_omniauth(auth)
-    user = User.find_by(uid: auth.uid)
-    if user
-      return user
-    elsif auth.info.email && (user = User.find_by(email: auth.info.email))
-      user.update(provider: auth.provider, uid: auth.uid)
-      return user
-    else
-      user = User.new(
-        provider: auth.provider,
-        uid: auth.uid,
-        email: "#{auth.uid}@line.placeholder.com",
-        password: Devise.friendly_token[0, 20]
-      )
+    # すでにLINE連携済みのユーザーを探す
+    user = User.find_by(provider: auth.provider, uid: auth.uid)
+    return user if user
+
+    # メールアドレスが取得でき、かつ本人確認済みの場合のみ既存アカウントに紐付ける
+    if auth.info.email && auth.extra.raw_info.email_verified
+      user = User.find_by(email: auth.info.email)
+      if user
+        user.update!(provider: auth.provider, uid: auth.uid)
+        return user
+      end
     end
-    end
+    
+    #新規ユーザーを作成する
+    User.create!(
+      provider: auth.provider,
+      uid: auth.uid,
+      email: auth.info.email || "#{auth.uid}@line.placeholder.com",
+      password: Devise.friendly_token[0, 20]
+    )
   end
 end
