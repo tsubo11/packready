@@ -29,6 +29,8 @@ class PackingListsController < ApplicationController
     @packing_list = current_user.packing_lists.build(packing_list_params)
     # 保存が成功した場合
     if @packing_list.save
+      # AI提案が選択されている場合、AIの提案を取得してitemsに保存する
+      save_ai_suggestions if packing_list_params[:mode] == "ai"
       # 作成したリストの詳細画面に遷移する
       redirect_to packing_list_path(@packing_list), notice: "リストを作成しました"
     # 保存が失敗した場合
@@ -70,6 +72,24 @@ class PackingListsController < ApplicationController
 
   def packing_list_params
     # フォームから送られてきたデータ全体からpacking_listのデータの受取を許可する
-    params.require(:packing_list).permit(:name, :departure_date, :notification_time)
+    params.require(:packing_list).permit(:name, :departure_date, :notification_time, :destination, :duration_days, :mode)
+  end
+
+  def save_ai_suggestions
+    # サービスクラスを呼び出し、タイミング別持ち物リストを取得する
+    suggestion = PackingListSuggestionService.call(
+      destination: @packing_list.destination,
+      duration_days: @packing_list.duration_days
+    )
+    # 提案の取得に成功した場合
+    return unless suggestion
+
+    # 前日までと当日の各itemsを保存する
+    %w[day_before morning].each do |timing|
+      suggestion[timing]&.each do |item_name|
+        @packing_list.items.create!(name: item_name, timing: timing)
+      end
+    end
+    
   end
 end

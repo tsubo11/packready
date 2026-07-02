@@ -11,6 +11,8 @@ ja:
       packing_list:
         name: リスト名
         departure_date: 出発日
+        destination: 行き先
+        duration_days: 泊数
   devise:
     omniauth_callbacks:
       failure: "LINEログインに失敗しました"
