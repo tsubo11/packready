@@ -20,8 +20,8 @@ class User < ApplicationRecord
         return user
       end
     end
-    
-    #新規ユーザーを作成する
+
+    # 新規ユーザーを作成する
     User.create!(
       provider: auth.provider,
       uid: auth.uid,

@@ -9,16 +9,16 @@ RSpec.describe "Users::OmniauthCallbacks", type: :request do
     def set_omniauth_mock(uid:, email: nil, email_verified: false)
       OmniAuth.config.test_mode = true
       OmniAuth.config.mock_auth[:line] = OmniAuth::AuthHash.new({
-        provider: "line",
-        uid: uid,
-        info: { email: email },
-        extra: { raw_info: { email_verified: email_verified } }
-      })
+                                                                  provider: "line",
+                                                                  uid: uid,
+                                                                  info: { email: email },
+                                                                  extra: { raw_info: { email_verified: email_verified } }
+                                                                })
     end
 
     context "LINE連携済みユーザーがログインする場合" do
       it "既存ユーザーでログインしてトップページにリダイレクトされる" do
-        user = create(:user, provider: "line", uid: uid)
+        create(:user, provider: "line", uid: uid)
         set_omniauth_mock(uid: uid)
 
         post "/users/auth/line/callback"
@@ -27,38 +27,51 @@ RSpec.describe "Users::OmniauthCallbacks", type: :request do
       end
     end
 
-    context "新規ユーザーがLINEログインする場合" do
-      it "新しいユーザーが作成されてトップページにリダイレクトされる" do
+    context "Bパターン：新規ユーザーがLINEログインする場合" do
+      it "新しいユーザーが作成される" do
         set_omniauth_mock(uid: uid)
 
-        expect {
+        expect do
           post "/users/auth/line/callback"
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
+      end
+
+      it "パッキングリスト画面にリダイレクトされる" do
+        set_omniauth_mock(uid: uid)
+
+        post "/users/auth/line/callback"
 
         expect(response).to redirect_to(packing_lists_path)
       end
     end
 
     context "メール連携済みユーザーがLINEログインする場合" do
-      it "email_verifiedがtrueのとき既存アカウントに紐付けられる" do
-        user = create(:user, email: email, provider: nil, uid: nil)
+      it "既存アカウントに紐付けられる" do
+        create(:user, email: email, provider: nil, uid: nil)
         set_omniauth_mock(uid: uid, email: email, email_verified: true)
 
-        expect {
+        expect do
           post "/users/auth/line/callback"
-        }.not_to change(User, :count)
+        end.not_to change(User, :count)
+      end
+
+      it "パッキングリスト画面にリダイレクトされる" do
+        create(:user, email: email, provider: nil, uid: nil)
+        set_omniauth_mock(uid: uid, email: email, email_verified: true)
+
+        post "/users/auth/line/callback"
 
         expect(response).to redirect_to(packing_lists_path)
       end
+    end
 
-      it "email_verifiedがfalseのとき新規ユーザーが作成される" do
-        create(:user, email: email, provider: nil, uid: nil)
-        set_omniauth_mock(uid: uid, email: email, email_verified: false)
+    it "email_verifiedがfalseのとき新規ユーザーが作成される" do
+      create(:user, email: email, provider: nil, uid: nil)
+      set_omniauth_mock(uid: uid, email: email, email_verified: false)
 
-        expect {
-          post "/users/auth/line/callback"
-        }.to change(User, :count).by(1)
-      end
+      expect do
+        post "/users/auth/line/callback"
+      end.to change(User, :count).by(1)
     end
 
     context "認証に失敗した場合" do
