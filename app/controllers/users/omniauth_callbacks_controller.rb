@@ -21,6 +21,7 @@ module Users
 
     # ユーザーがLINEログインをキャンセルしたときに呼ばれるアクション
     def failure
+      Rails.logger.error "OmniAuth failure: #{request.env['omniauth.error.type']} / #{request.env['omniauth.error']&.message}"
       redirect_to new_user_session_url, alert: t("devise.omniauth_callbacks.cancelled")
     end
   end
